@@ -11,10 +11,8 @@ public class Tester {
         for (int i = 0; i < n; i++) {
             array[i] = in.nextInt();
         }
-        Sorting.insertSort(array);
-        for (int i = 0; i < array.length; i++) {
-            System.out.println(array[i]);
-        }
+        Sorting.merge(array, 0, array.length - 1);
+        System.out.println(java.util.Arrays.toString(array));
     }
 
     static class FastScanner {
