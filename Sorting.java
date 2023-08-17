@@ -81,4 +81,46 @@ public class Sorting {
         for (int i = start; i <= end; i++)
             array[i] = a[i - start];
     }
+
+    /**
+     * Quick sort algorithm partitions elements into those greater or less than a
+     * pivot recursively to sort. O(nlogn) complexity on average.
+     * 
+     * @param array to be sorted
+     * @param start index of the section
+     * @param end   index of the section
+     */
+    public static void quickSort(int[] array, int start, int end) {
+        if (start >= end)
+            return;
+        int partition = partitionLomuto(array, start, end);
+        quickSort(array, start, partition - 1);
+        quickSort(array, partition + 1, end);
+    }
+
+    /**
+     * Helper partition method to split up the arrays for quick sort. Returns the
+     * new index of the pivot.
+     * 
+     * @param array
+     * @param start
+     * @param end
+     * @return
+     */
+    private static int partitionLomuto(int[] array, int start, int end) {
+        int pivot = array[end];
+        int i = start - 1;
+        for (int j = start; j < end; j++) {
+            if (array[j] < pivot) {
+                i++;
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+        }
+        int temp = array[i + 1];
+        array[i + 1] = array[end];
+        array[end] = temp;
+        return i + 1;
+    }
 }
