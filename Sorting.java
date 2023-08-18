@@ -1,6 +1,34 @@
 public class Sorting {
 
     /**
+     * Binary search finds the index of a specified element and returns -1 if the
+     * element is not found. I know it's not a sorting algorithm, but implemented
+     * here for practice. O(log(n)) complexity.
+     * 
+     * @param array from which value is to be found from
+     * @param value to be found
+     * @return
+     */
+    public static int binarySearch(int[] array, int value) {
+        int left = 0;
+        int right = array.length - 1;
+        int mid = (left + right) / 2;
+        while (left < right) {
+            if (value >= mid) {
+                left = mid;
+                mid = (left + right + 1) / 2;
+            } else {
+                right = mid - 1;
+                mid = (left + right + 1) / 2;
+            }
+        }
+        if (array[right] == value)
+            return right;
+        else
+            return -1;
+    }
+
+    /**
      * Swap sort finds the minimum value in the array and swaps it with the current
      * value until the array is sorted. O(n^2) complexity.
      * 
@@ -130,11 +158,11 @@ public class Sorting {
         while (end > 0) {
             for (int i = 1; i < end; i++) {
                 int j = i;
-                while (j > 0 && array[j] > array[(j-1)/2]) {
+                while (j > 0 && array[j] > array[(j - 1) / 2]) {
                     int temp = array[j];
-                    array[j] = array[(j-1)/2];
-                    array[(j-1)/2] = temp;
-                    j = (j-1)/2;
+                    array[j] = array[(j - 1) / 2];
+                    array[(j - 1) / 2] = temp;
+                    j = (j - 1) / 2;
                 }
             }
             int temp2 = array[0];
@@ -146,23 +174,25 @@ public class Sorting {
 
     // Heapifying from the end
     public static void heapSort2(int[] array) {
-        for (int i = array.length/2 - 1; i >= 0; i--) {
+        for (int i = array.length / 2 - 1; i >= 0; i--) {
             heapify(array, array.length, i);
         }
         for (int i = array.length; i > 0; i--) {
             int temp = array[0];
-            array[0] = array[i-1];
-            array[i-1] = temp;
-            heapify(array, i-1, 0);
+            array[0] = array[i - 1];
+            array[i - 1] = temp;
+            heapify(array, i - 1, 0);
         }
     }
 
     private static void heapify(int[] array, int end, int i) {
         int largest = i;
-        int left = (2*i) + 1;
-        int right = (2*i) + 2;
-        if (left < end && array[left] > array[largest]) largest = left;
-        if (right < end && array[right] > array[largest]) largest = right;
+        int left = (2 * i) + 1;
+        int right = (2 * i) + 2;
+        if (left < end && array[left] > array[largest])
+            largest = left;
+        if (right < end && array[right] > array[largest])
+            largest = right;
         if (largest != i) {
             int temp = array[i];
             array[i] = array[largest];
