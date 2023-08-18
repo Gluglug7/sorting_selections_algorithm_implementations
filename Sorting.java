@@ -123,4 +123,51 @@ public class Sorting {
         array[end] = temp;
         return i + 1;
     }
+
+    // Heapifying from the start
+    public static void heapSort(int[] array) {
+        int end = array.length;
+        while (end > 0) {
+            for (int i = 1; i < end; i++) {
+                int j = i;
+                while (j > 0 && array[j] > array[(j-1)/2]) {
+                    int temp = array[j];
+                    array[j] = array[(j-1)/2];
+                    array[(j-1)/2] = temp;
+                    j = (j-1)/2;
+                }
+            }
+            int temp2 = array[0];
+            array[0] = array[end - 1];
+            array[end - 1] = temp2;
+            end--;
+        }
+    }
+
+    // Heapifying from the end
+    public static void heapSort2(int[] array) {
+        for (int i = array.length/2 - 1; i >= 0; i--) {
+            heapify(array, array.length, i);
+        }
+        for (int i = array.length; i > 0; i--) {
+            int temp = array[0];
+            array[0] = array[i-1];
+            array[i-1] = temp;
+            heapify(array, i-1, 0);
+        }
+    }
+
+    private static void heapify(int[] array, int end, int i) {
+        int largest = i;
+        int left = (2*i) + 1;
+        int right = (2*i) + 2;
+        if (left < end && array[left] > array[largest]) largest = left;
+        if (right < end && array[right] > array[largest]) largest = right;
+        if (largest != i) {
+            int temp = array[i];
+            array[i] = array[largest];
+            array[largest] = temp;
+            heapify(array, end, largest);
+        }
+    }
 }

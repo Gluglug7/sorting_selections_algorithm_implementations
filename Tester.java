@@ -11,7 +11,7 @@ public class Tester {
         for (int i = 0; i < n; i++) {
             array[i] = in.nextInt();
         }
-        Sorting.quickSort(array, 0, array.length - 1);
+        Sorting.heapSort2(array);
         System.out.println(java.util.Arrays.toString(array));
     }
 
