@@ -152,6 +152,24 @@ public class Sorting {
         return i + 1;
     }
 
+    public static int myPartition(int[] array) {
+        int pivot = array[array.length - 1];
+        int i = 0, j = array.length - 1;
+        while (i < j) {
+            if (array[i] >= pivot) {
+                j--;
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            } else {
+                i++;
+            }
+        }
+        array[array.length - 1] = array[i];
+        array[i] = pivot;
+        return i;
+    }
+
     // Heapifying from the start
     public static void heapSort(int[] array) {
         int end = array.length;
@@ -199,5 +217,17 @@ public class Sorting {
             array[largest] = temp;
             heapify(array, end, largest);
         }
+    }
+
+    public static int quickSelect(int[] array, int k) {
+        int left = 0; 
+        int right = array.length - 1;
+        while (left < right) {
+            int q = partitionLomuto(array, left, right);
+            if (q == k - 1) return array[q];
+            else if (k - 1 < q) right = q - 1;
+            else left = q + 1;
+        }
+        return array[left];
     }
 }
