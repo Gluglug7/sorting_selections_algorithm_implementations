@@ -1,5 +1,6 @@
 public class BinarySearchTree {
     SetNode root;
+    int height;
     
     public boolean contains(int value) {
         SetNode node = root;
@@ -37,6 +38,40 @@ public class BinarySearchTree {
         } else {
             parent.right = newNode;
         }
+    }
+
+    public SetNode findMax(SetNode node) {
+        while (node.right != null) {
+            node = node.right;
+        }
+        return node;
+    }
+
+    public SetNode findMin(SetNode node) {
+        while (node.left != null) {
+            node = node.left;
+        }
+        return node;
+    }
+
+    public SetNode findNextLarger(SetNode node) {
+        if (node.right != null)
+            return findMin(node.right);
+        while (node.parent != null && node.parent.left != node)
+            node = node.parent;
+        return node.parent;
+    }
+
+    public void simpleRemove(SetNode node) {
+        //TODO
+    }
+
+    public void remove(SetNode node) {
+        //TODO
+    }
+
+    public void rotate(SetNode node) {
+        //TODO
     }
 }
 

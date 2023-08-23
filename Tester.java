@@ -7,12 +7,12 @@ public class Tester {
     public static void main(String[] args) {
         FastScanner in = new FastScanner();
         int n = in.nextInt();
+        int k = in.nextInt();
         int[] array = new int[n];
         for (int i = 0; i < n; i++) {
             array[i] = in.nextInt();
         }
-        Sorting.heapSort2(array);
-        System.out.println(java.util.Arrays.toString(array));
+        System.out.println(Sorting.quickSelect(array, k));
     }
 
     static class FastScanner {
