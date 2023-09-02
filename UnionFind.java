@@ -6,14 +6,14 @@ public class UnionFind {
         this.parent = new int[n];
         this.height = new int[n];
         for (int i = 0; i < n; i++) {
-            this.parent[i] = -1;
+            this.parent[i] = i;
             this.height[i] = 0;
         }
     }
 
     public int findRep(int x) {
         int rep = x;
-        while (parent[rep] != -1) {
+        while (parent[rep] != rep) {
             rep = parent[rep];
         }
         while (parent[x] != rep) {
@@ -21,7 +21,6 @@ public class UnionFind {
             parent[x] = rep;
             x = next;
         }
-
         return rep;
     }
 

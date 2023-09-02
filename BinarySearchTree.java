@@ -71,8 +71,39 @@ public class BinarySearchTree {
     }
 
     public void rotate(SetNode node) {
-        //TODO
-    }
+        if (node.parent == null) return;
+        if (node.parent == root) {
+            if (node.parent.right == node) {
+                node.parent.right = node.left;
+                node.left = node.parent;
+                node.parent.parent = node;
+                root = node;
+            } else {
+                node.parent.left = node.right;
+                node.right = node.parent;
+                node.parent.parent = node; 
+                root = node;
+            }
+        } else {
+            if (node.parent.parent.right == node.parent) {
+                node.parent.parent.right = node;
+            } else {
+                node.parent.parent.left = node;
+            }
+
+            if (node.parent.right == node) {
+                node.parent.right = node.left;
+                node.left.parent = node.parent;
+                node.left = node.parent;
+                node.parent.parent = node;
+            } else {
+                node.parent.left = node.right;
+                node.right.parent = node.parent;
+                node.right = node.parent;
+                node.parent.parent = node;
+            }
+        }
+    } 
 }
 
 class SetNode {
